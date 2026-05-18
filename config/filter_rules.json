@@ -1,0 +1,7 @@
+{
+  "exclude_long_running": true,
+  "max_episode_count": 100,
+  "max_old_season_years": 2,
+  "prefer_releasing": true,
+  "prefer_current_season": true
+}
