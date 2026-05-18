@@ -215,49 +215,9 @@ CHECK_INTERVAL_MINUTES=180
 }
 ```
 
-## GitHub に push する前の確認事項
-
-- `.env` を GitHub に上げない
-- `.env.example` に実際の Webhook URL や API キーを書かない
-- OpenAI APIキーを使う場合も `.env` だけに書き、GitHubには上げない
-- `python -m app.main` が実行できることを確認する
-- Discord に Embed が投稿されることを確認する
-- `data/posted_items.json` に投稿済み URL が保存されることを確認する
-- `README.md` の説明と実際の動作が合っていることを確認する
-
-## 提出前チェックリスト
-
-- Python 3.11 以上で実行している
-- `pip install -r requirements.txt` が成功する
-- `.env` に `DISCORD_WEBHOOK_URL` を設定した
-- `.env` が `.gitignore` に含まれている
-- `X_BEARER_TOKEN` は任意で、空でもアプリが動く
-- `OPENAI_API_KEY` は任意で、空でもAI要約なしでアプリが動く
-- `CHECK_INTERVAL_MINUTES` は任意で、空または不正な値なら60分になる
-- API消費を避ける確認では `python -m app.main --dry-run --no-ai` を使う
-- `python -m compileall -q app` が成功する
-- `python -m app.main --dry-run` が成功し、Discord に投稿せず上位 5 件が表示される
-- 定期実行を試す場合は `python -m app.main --watch --dry-run` を使い、確認後に `Ctrl+C` で止める
-- Discord に実投稿する前に Webhook URL が正しいことを確認した
-- `data/posted_items.json` は提出時点では空の `{"posted_urls": []}` にしておく
 
 `data/posted_items.json` はアプリの重複投稿防止に必要なファイルなので、GitHub に含めてかまいません。ただし、自分が実行した後の投稿済み URL が入ったままだと提出先の環境で通知がスキップされる可能性があります。提出前は空の状態に戻すのがおすすめです。
 
-## 課題提出用の短い説明文
-
-このアプリは、アニメ関連コンテンツの話題度を AniList、Google News、Reddit から取得し、スコア化して Discord に通知する Bot です。X/Twitter API は任意機能として設計し、認証トークンがある場合だけ反応量をスコアに加えます。Webhook URL や API キーは `.env` から読み込み、投稿済み URL は JSON に保存して重複投稿を防ぎます。
-
-## 感想テンプレート
-
-```text
-Web APIを使ってプログラムを作った感想:
-
-今回、AniList GraphQL API、Google News RSS、Reddit RSS、Discord Webhookを使って、複数の情報源からデータを集めるアプリを作りました。
-APIごとに返ってくるデータ形式が違うため、必要な項目を取り出して同じ形式にそろえる部分が難しかったです。
-また、API取得に失敗してもアプリ全体が止まらないように try/except を入れることで、実用的なプログラムに近づけられたと思います。
-X/Twitter APIは認証や制限があるため任意機能にし、トークンがない場合でも動く設計にしました。
-複数の情報源をスコア化して並べることで、単にニュースを表示するだけでなく「今話題になっていそうなもの」を推定できる点が面白かったです。
-```
 
 ## ディレクトリ構成
 
